@@ -6,11 +6,13 @@ user is created.
 """
 
 from django.contrib.auth.backends import RemoteUserBackend
+from allauth.account.utils import sync_user_email_addresses
 
 class MailHeaderBackend(RemoteUserBackend):
     def configure_user(self, user):
         username = user.get_username()
         user.email = username;
         user.save()
-
+        sync_user_email_addresses(user)
+        
         return user

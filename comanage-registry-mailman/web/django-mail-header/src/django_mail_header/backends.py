@@ -7,6 +7,7 @@ user is created.
 
 from django.contrib.auth.backends import RemoteUserBackend
 from allauth.account.utils import sync_user_email_addresses
+from allauth.account.models import EmailAddress
 
 class MailHeaderBackend(RemoteUserBackend):
     def configure_user(self, user):
@@ -14,5 +15,10 @@ class MailHeaderBackend(RemoteUserBackend):
         user.email = username;
         sync_user_email_addresses(user)
         user.save()
+
+        emails = EmailAddress.objects.filter(user=user, verified=False)
+        for email in emails:
+            email.verified=True
+            email.save()
 
         return user

@@ -60,4 +60,7 @@ COPY httpd.conf /usr/local/apache2/conf/
 COPY start.sh /usr/local/bin/apache-httpd-start.sh
 COPY shibd-start.sh /usr/local/bin/shibd-start.sh
 
+COPY restart-apache /etc/cron.daily/restart-apache
+RUN chmod +x /etc/cron.daily/restart-apache
+
 ENTRYPOINT ["/usr/bin/supervisord", "-c", "/usr/local/etc/supervisord.conf"]

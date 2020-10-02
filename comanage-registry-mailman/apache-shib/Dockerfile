@@ -25,11 +25,11 @@ FROM comanage-registry-shibboleth-sp-base:${COMANAGE_REGISTRY_SHIBBOLETH_SP_VERS
 
 FROM comanage-registry-base:${COMANAGE_REGISTRY_VERSION}-${COMANAGE_REGISTRY_BASE_IMAGE_VERSION} AS comanage-registry-base
 
-FROM httpd:2.4.38
+FROM httpd:2.4.46
 
 RUN apt-get update && apt-get install -y \
          curl \
-         libssl1.0.2 \
+         libssl1.1 \
          netcat-traditional \
          procps \
          supervisor \
